@@ -56,3 +56,35 @@ params[:task][:description]
 - Better code organization
 - Don't repeat yourself
 - Partials are partial templates (meant to be shared by other templates)
+- the form helpers used for edit & creating a new task uses the same code, so, we could re-use the code & avoid duplication.
+- so create a  `_form.html.erb`. Using `_` at the beginning suggests rails that it is a partial code & not a full template
+
+```
+
+<%= link_to("Back to List", tasks_path, :class=> 'back-link') %>
+
+<div class="tasks edit">
+  <h2>Edit Task</h2>
+
+  <%= form_for(@task) do |f| %>
+     <% # url: task_path(@task) , method: 'patch' %>
+    
+    <%= render(partial: 'form', locals: {f: f}) %> 
+    <div class="form-buttons">
+      <%= f.submit("Edit Task") %>
+    </div>
+
+  <% end %>
+</div>
+
+```
+
+## Is a Delete Form Necessary ?
+
+- Not a default action
+- Often omitted
+- Link to destroy
+- Link to destroy with a confirmation alert
+- Link to a confirmation page
+
+
